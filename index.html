@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Retro Game Hub</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Welcome to the Retro Game Hub!</h1>
+  <h1>Retro Game Hub</h1>
   <p>Explore trivia, ratings, and fun facts about classic video games.</p>
+
+  <!-- Fun Facts Button -->
+  <button id="factButton" onclick="showFacts()">Show Fun Facts</button>
+
+  <!-- Facts Section -->
+  <div id="facts" style="display:none;">
+    <h2>Did You Know These Five Things?</h2>
+    <ul id="factList"></ul>
+
+    <!-- Ratings Button -->
+    <button id="ratingsButton" onclick="showRatings()">Show Ratings</button>
+
+    <!-- Ratings Section -->
+    <div id="ratings" style="display:none;">
+      <h2>Official Ratings</h2>
+      <div id="ratingsList"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
