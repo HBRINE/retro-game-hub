@@ -92,12 +92,12 @@ function showRatings() {
   };
 
   const gameIcons = {
-    "Duck Life 2": "Duck Life 2.jpg",
-    "Run 3": "Run 3.jpg",
-    "Minecraft PE Lite/Demo": "MCPE.jpg",
-    "Roblox": "Roblox.jpg",
-    "Terraria & tModLoader": ["Terraria.png", "tModLoader.png"],
-    "DOOM (1993)": "DOOM.jpg"
+    "Duck Life 2": "images/ducklife2.jpg",
+    "Run 3": "images/run3.jpg",
+    "Minecraft PE Lite/Demo": "images/mcpe.jpg",
+    "Roblox": "images/roblox.jpg",
+    "Terraria & tModLoader": ["images/terraria.png", "images/tmodloader.png"],
+    "DOOM (1993)": "images/doom.jpg"
   };
 
   const ratingsList = document.getElementById("ratingsList");
