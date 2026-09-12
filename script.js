@@ -1,3 +1,4 @@
+// Show Fun Facts
 function showFacts() {
   const facts = [
     "Coolmath Games once had a non-educational section called 'Coolified Games' that featured more traditional arcade-style titles before being retired.",
@@ -19,6 +20,7 @@ function showFacts() {
   document.getElementById("factButton").style.display = "none";
 }
 
+// Create star rating visuals
 function createStarRating(score) {
   const fullStars = Math.floor(score);
   const halfStar = score % 1 >= 0.5 ? 1 : 0;
@@ -27,13 +29,13 @@ function createStarRating(score) {
   let starsHTML = "";
 
   for (let i = 0; i < fullStars; i++) {
-    starsHTML += `<svg class="star full" viewBox="0 0 24 24">
+    starsHTML += `<svg class="star full" viewBox="0 0 24 24" aria-hidden="true">
       <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
     </svg>`;
   }
 
   if (halfStar) {
-    starsHTML += `<svg class="star half" viewBox="0 0 24 24">
+    starsHTML += `<svg class="star half" viewBox="0 0 24 24" aria-hidden="true">
       <defs>
         <linearGradient id="halfGrad">
           <stop offset="50%" stop-color="gold"/>
@@ -45,7 +47,7 @@ function createStarRating(score) {
   }
 
   for (let i = 0; i < emptyStars; i++) {
-    starsHTML += `<svg class="star empty" viewBox="0 0 24 24">
+    starsHTML += `<svg class="star empty" viewBox="0 0 24 24" aria-hidden="true">
       <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
     </svg>`;
   }
@@ -56,6 +58,7 @@ function createStarRating(score) {
   return div;
 }
 
+// Show Ratings
 function showRatings() {
   const ratingsData = {
     "Duck Life 2": [
@@ -88,6 +91,15 @@ function showRatings() {
     ]
   };
 
+  const gameIcons = {
+    "Duck Life 2": "Duck Life 2.jpg",
+    "Run 3": "Run 3.jpg",
+    "Minecraft PE Lite/Demo": "MCPE.jpg",
+    "Roblox": "Roblox.jpg",
+    "Terraria & tModLoader": ["Terraria.png", "tModLoader.png"],
+    "DOOM (1993)": "DOOM.jpg"
+  };
+
   const ratingsList = document.getElementById("ratingsList");
   ratingsList.innerHTML = "";
 
@@ -97,7 +109,32 @@ function showRatings() {
 
     const nameDiv = document.createElement("div");
     nameDiv.className = "game-name";
-    nameDiv.textContent = game + ":";
+
+    // Add icon(s) before game title
+    if (gameIcons[game]) {
+      if (Array.isArray(gameIcons[game])) {
+        const iconContainer = document.createElement("div");
+        iconContainer.className = "icon-stack";
+        gameIcons[game].forEach(iconFile => {
+          const icon = document.createElement("img");
+          icon.src = iconFile;
+          icon.alt = game + " icon";
+          icon.className = "game-icon";
+          iconContainer.appendChild(icon);
+        });
+        nameDiv.appendChild(iconContainer);
+      } else {
+        const icon = document.createElement("img");
+        icon.src = gameIcons[game];
+        icon.alt = game + " icon";
+        icon.className = "game-icon";
+        nameDiv.appendChild(icon);
+      }
+    }
+
+    const titleSpan = document.createElement("span");
+    titleSpan.textContent = game + ":";
+    nameDiv.appendChild(titleSpan);
 
     const ratingsDiv = document.createElement("ul");
     ratingsDiv.className = "game-ratings";
