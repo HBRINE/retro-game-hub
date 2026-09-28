@@ -58,7 +58,7 @@ function createStarRating(score) {
   const div = document.createElement("div");
   div.className = "star-rating";
   div.innerHTML = starsHTML;
-  div.title = score + " out of 5 stars"; // Tooltip for accessibility/engagement
+  div.title = score + " out of 5 stars"; // Tooltip for accessibility
   return div;
 }
 
