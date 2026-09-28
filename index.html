@@ -2,25 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Retro Game Hub</title>
+  <title>Retro Game Hub | Classic Video Game Trivia</title>
+  <meta name="description" content="Retro Game Hub – Explore trivia, ratings, and fun facts about classic video games.">
+  <meta name="keywords" content="retro games, classic video games, trivia, ratings, fun facts, gaming history">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Retro Game Hub</h1>
     <p>Explore trivia, ratings, and fun facts about classic video games.</p>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#facts">Fun Facts</a></li>
+        <li><a href="#ratings">Ratings</a></li>
+        <li><a href="#bio">Biography</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <div class="layout">
     <!-- Left Column -->
     <main class="left-column">
-      <button id="factButton" aria-controls="facts" onclick="showFacts()">Show Fun Facts</button>
+      <button id="factButton" aria-controls="facts" aria-expanded="false" onclick="showFacts()">Show Fun Facts</button>
 
       <section id="facts" style="display:none;">
         <h2>Did You Know These Five Things?</h2>
         <ul id="factList"></ul>
 
-        <button id="ratingsButton" aria-controls="ratings" onclick="showRatings()">Show Ratings</button>
+        <button id="ratingsButton" aria-controls="ratings" aria-expanded="false" onclick="showRatings()">Show Ratings</button>
 
         <section id="ratings" style="display:none;">
           <h2>Official Ratings</h2>
@@ -30,7 +42,7 @@
     </main>
 
     <!-- Right Column -->
-    <aside class="right-column">
+    <aside class="right-column" id="bio">
       <div class="bio-header">
         <h2>Biography</h2>
         <img src="images/img_PageAuthor.png" alt="Photo of Conner Chen" class="bio-photo">
@@ -44,6 +56,27 @@
       <p>Looking ahead, I aim to continue developing projects that satisfy my personal interests and transform ideas into reality. Whether through game design, web development, creative writing, or photographic editing, I want my work to inspire curiosity, foster connection, and serve as a reflection of both my passions and my growth. My hope is that these endeavors will not only resonate with others but also continue to challenge and enrich my future self.</p>
     </aside>
   </div>
+
+  <!-- Contact Form -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="https://wp.zybooks.com/form-viewer.php" method="POST" target="_blank">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="userName" placeholder="Your name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="userEmail" placeholder="Your email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="userMessage" rows="5" cols="40" placeholder="Your message"></textarea>
+
+      <input type="submit" value="Send">
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Retro Game Hub | <a href="https://github.com/HBRINE/retro-game-hub">GitHub Repository</a></p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

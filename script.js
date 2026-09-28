@@ -17,7 +17,9 @@ function showFacts() {
   });
 
   document.getElementById("facts").style.display = "block";
-  document.getElementById("factButton").style.display = "none";
+  const factButton = document.getElementById("factButton");
+  factButton.style.display = "none";
+  factButton.setAttribute("aria-expanded", "true");
 }
 
 // Create star rating visuals
@@ -35,14 +37,15 @@ function createStarRating(score) {
   }
 
   if (halfStar) {
+    const gradId = "halfGrad" + Math.random().toString(36).substr(2, 5);
     starsHTML += `<svg class="star half" viewBox="0 0 24 24" aria-hidden="true">
       <defs>
-        <linearGradient id="halfGrad">
+        <linearGradient id="${gradId}">
           <stop offset="50%" stop-color="gold"/>
           <stop offset="50%" stop-color="#444"/>
         </linearGradient>
       </defs>
-      <polygon fill="url(#halfGrad)" points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+      <polygon fill="url(#${gradId})" points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
     </svg>`;
   }
 
@@ -55,6 +58,7 @@ function createStarRating(score) {
   const div = document.createElement("div");
   div.className = "star-rating";
   div.innerHTML = starsHTML;
+  div.title = score + " out of 5 stars"; // Tooltip for accessibility/engagement
   return div;
 }
 
@@ -118,7 +122,7 @@ function showRatings() {
         gameIcons[game].forEach(iconFile => {
           const icon = document.createElement("img");
           icon.src = iconFile;
-          icon.alt = game + " icon";
+          icon.alt = game + " official logo";
           icon.className = "game-icon";
           iconContainer.appendChild(icon);
         });
@@ -126,7 +130,7 @@ function showRatings() {
       } else {
         const icon = document.createElement("img");
         icon.src = gameIcons[game];
-        icon.alt = game + " icon";
+        icon.alt = game + " official logo";
         icon.className = "game-icon";
         nameDiv.appendChild(icon);
       }
@@ -154,5 +158,7 @@ function showRatings() {
   });
 
   document.getElementById("ratings").style.display = "block";
-  document.getElementById("ratingsButton").style.display = "none";
+  const ratingsButton = document.getElementById("ratingsButton");
+  ratingsButton.style.display = "none";
+  ratingsButton.setAttribute("aria-expanded", "true");
 }

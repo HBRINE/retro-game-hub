@@ -18,6 +18,30 @@ h1 {
   text-shadow: 2px 2px red;
 }
 
+/* Navigation bar */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: magenta;
+  color: yellow;
+}
+
 button {
   background-color: purple;
   color: white;
@@ -72,12 +96,12 @@ button:hover {
 .bio-header h2 {
   margin: 0;
   font-size: 24px;
-  color: orange;              /* distinct main text color */
-  text-shadow: 2px 2px red;   /* dramatic backdrop like site title */
-  background-color: #222;     /* subtle backdrop like Fun Facts */
+  color: orange;
+  text-shadow: 2px 2px red;
+  background-color: #222;
   padding: 8px 12px;
   border-radius: 6px;
-  border: 2px solid lime;     /* lime border for consistency */
+  border: 2px solid lime;
 }
 
 .bio-photo {
@@ -138,7 +162,7 @@ button:hover {
 .game-block {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* ratings on right, logos/titles fixed width on left */
+  justify-content: space-between;
   margin: 20px 0;
   padding: 15px;
   background-color: #111;
@@ -146,16 +170,16 @@ button:hover {
   border-radius: 5px;
 }
 
-/* Game name section (reverted for consistent alignment) */
+/* Game name section */
 .game-name {
-  flex: 0 0 240px;            /* fixed width keeps alignment consistent */
+  flex: 0 0 240px;
   font-weight: bold;
   color: cyan;
   display: flex;
   align-items: center;
-  justify-content: center;    /* center logos + title horizontally */
+  justify-content: center;
   gap: 12px;
-  padding-left: 20px;         /* breathing room from left edge */
+  padding-left: 20px;
 }
 
 .game-ratings {
@@ -168,7 +192,7 @@ button:hover {
   color: white;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* evenly space text and stars */
+  justify-content: space-between;
 }
 
 .game-ratings li span {
@@ -206,3 +230,97 @@ button:hover {
 .star.full polygon { fill: gold; }
 .star.half polygon { fill: url(#halfGrad); }
 .star.empty polygon { fill: #444; }
+
+/* Contact form styles */
+#contact {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px solid lime;
+  border-radius: 10px;
+  background-color: #111;
+  color: white;
+}
+
+#contact h2 {
+  text-align: center;
+  color: cyan;
+  text-shadow: 1px 1px magenta;
+  margin-bottom: 20px;
+}
+
+#contact label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: yellow;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid magenta;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+
+#contact input[type="text"]:focus,
+#contact input[type="email"]:focus,
+#contact textarea:focus {
+  border-color: cyan;
+  outline: none;
+}
+
+#contact input[type="submit"] {
+  margin-top: 20px;
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#contact input[type="submit"]:hover {
+  background-color: magenta;
+  color: yellow;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #111;
+  color: white;
+  border-top: 3px solid lime;
+}
+
+footer a {
+  color: cyan;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: yellow;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+  .left-column, .right-column {
+    margin: 0;
+    flex: 1;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
