@@ -1,164 +1,93 @@
-// Show Fun Facts
-function showFacts() {
-  const facts = [
-    "Coolmath Games once had a non-educational section called 'Coolified Games' that featured more traditional arcade-style titles before being retired.",
-    "Minecraft Pocket Edition Lite was released for iOS as a demo version, allowing players to try the game with limited features before purchasing the full edition.",
-    "The iconic 'Oof!' death sound in Roblox originated from the 2000 PC game Messiah, developed by Shiny Entertainment, and was later adopted into Roblox.",
-    "Terraria’s developers collaborated with modder Blushiemagic to support tModLoader, making it an official modding platform integrated into the game on Steam.",
-    "DOOM (1993) soundtrack was inspired by heavy metal bands like Metallica and Slayer, and the game was added to the Library of Congress National Recording Registry in 2026."
-  ];
+/* ================================
+   Retro Game Hub Script
+   Complete Unified Version
+   ================================ */
 
-  const factList = document.getElementById("factList");
-  factList.innerHTML = "";
-  facts.forEach(fact => {
-    const li = document.createElement("li");
-    li.textContent = fact;
-    factList.appendChild(li);
-  });
+/* Contact Form Validation */
+function validateContactForm() {
+  const name = document.forms["contactForm"]["name"].value;
+  const email = document.forms["contactForm"]["email"].value;
+  const message = document.forms["contactForm"]["message"].value;
 
-  document.getElementById("facts").style.display = "block";
-  const factButton = document.getElementById("factButton");
-  factButton.style.display = "none";
-  factButton.setAttribute("aria-expanded", "true");
+  if (name === "" || email === "" || message === "") {
+    alert("Please fill out all fields before submitting!");
+    return false;
+  }
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!email.match(emailPattern)) {
+    alert("Please enter a valid email address.");
+    return false;
+  }
+  return true;
 }
 
-// Create star rating visuals
-function createStarRating(score) {
-  const fullStars = Math.floor(score);
-  const halfStar = score % 1 >= 0.5 ? 1 : 0;
-  const emptyStars = 5 - fullStars - halfStar;
+/* Trivia Quiz Validation + Feedback */
+function validateTriviaForm() {
+  const form = document.forms["triviaForm"];
+  const q1 = form["q1"].value;
+  const q2 = form["q2"].value;
+  const q3 = form["q3"].value;
 
-  let starsHTML = "";
-
-  for (let i = 0; i < fullStars; i++) {
-    starsHTML += `<svg class="star full" viewBox="0 0 24 24" aria-hidden="true">
-      <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
-    </svg>`;
+  if (q1 === "" || q2 === "" || q3 === "") {
+    alert("Please answer all trivia questions before submitting!");
+    return false;
   }
 
-  if (halfStar) {
-    const gradId = "halfGrad" + Math.random().toString(36).substr(2, 5);
-    starsHTML += `<svg class="star half" viewBox="0 0 24 24" aria-hidden="true">
-      <defs>
-        <linearGradient id="${gradId}">
-          <stop offset="50%" stop-color="gold"/>
-          <stop offset="50%" stop-color="#444"/>
-        </linearGradient>
-      </defs>
-      <polygon fill="url(#${gradId})" points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
-    </svg>`;
-  }
+  let score = 0;
+  if (q1 === "1980") score++;
+  if (q2 === "NES") score++;
+  if (q3 === "Sega") score++;
 
-  for (let i = 0; i < emptyStars; i++) {
-    starsHTML += `<svg class="star empty" viewBox="0 0 24 24" aria-hidden="true">
-      <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
-    </svg>`;
-  }
-
-  const div = document.createElement("div");
-  div.className = "star-rating";
-  div.innerHTML = starsHTML;
-  div.title = score + " out of 5 stars"; // Tooltip for accessibility
-  return div;
+  alert("You scored " + score + " out of 3!");
+  return false; // prevent actual form submission
 }
 
-// Show Ratings
-function showRatings() {
-  const ratingsData = {
-    "Duck Life 2": [
-      { text: "Coolmath Games 4.8/5", score: 4.8 },
-      { text: "Kongregate Archive 4.2/5", score: 4.2 }
-    ],
-    "Run 3": [
-      { text: "Coolmath Games 4.7/5", score: 4.7 },
-      { text: "Kongregate Archive 4.5/5", score: 4.5 }
-    ],
-    "Minecraft PE Lite/Demo": [
-      { text: "iOS Metacritic 53/100", score: 2.6 },
-      { text: "Google Play Demo 4.24/5", score: 4.2 }
-    ],
-    "Roblox": [
-      { text: "Common Sense Media 4/5", score: 4.0 },
-      { text: "Google Play 4.4/5", score: 4.4 },
-      { text: "Apple App Store 4.6/5", score: 4.6 }
-    ],
-    "Terraria & tModLoader": [
-      { text: "Terraria PC Metacritic 83/100", score: 4.1 },
-      { text: "Terraria Xbox 360 81/100", score: 4.0 },
-      { text: "Terraria PS3 80/100", score: 4.0 },
-      { text: "Terraria Switch 81/100", score: 4.0 },
-      { text: "tModLoader Steam Reviews 'Very Positive' ~4.8/5", score: 4.8 }
-    ],
-    "DOOM (1993)": [
-      { text: "Metacritic 83/100", score: 4.1 },
-      { text: "IGN 9/10", score: 4.5 }
-    ]
+/* Highlight Correct Answers After Quiz Submission */
+function showQuizAnswers() {
+  const answers = {
+    q1: "1980",
+    q2: "NES",
+    q3: "Sega"
   };
 
-  const gameIcons = {
-    "Duck Life 2": "images/ducklife2.jpg",
-    "Run 3": "images/run3.jpg",
-    "Minecraft PE Lite/Demo": "images/mcpe.jpg",
-    "Roblox": "images/roblox.jpg",
-    "Terraria & tModLoader": ["images/terraria.png", "images/tmodloader.png"],
-    "DOOM (1993)": "images/doom.jpg"
-  };
+  for (let key in answers) {
+    const options = document.getElementsByName(key);
+    options.forEach(option => {
+      if (option.value === answers[key]) {
+        option.parentElement.style.color = "limegreen";
+        option.parentElement.style.fontWeight = "bold";
+      }
+    });
+  }
+}
 
-  const ratingsList = document.getElementById("ratingsList");
-  ratingsList.innerHTML = "";
-
-  Object.keys(ratingsData).forEach(game => {
-    const block = document.createElement("div");
-    block.className = "game-block";
-
-    const nameDiv = document.createElement("div");
-    nameDiv.className = "game-name";
-
-    // Add icon(s) before game title
-    if (gameIcons[game]) {
-      if (Array.isArray(gameIcons[game])) {
-        const iconContainer = document.createElement("div");
-        iconContainer.className = "icon-stack";
-        gameIcons[game].forEach(iconFile => {
-          const icon = document.createElement("img");
-          icon.src = iconFile;
-          icon.alt = game + " official logo";
-          icon.className = "game-icon";
-          iconContainer.appendChild(icon);
-        });
-        nameDiv.appendChild(iconContainer);
-      } else {
-        const icon = document.createElement("img");
-        icon.src = gameIcons[game];
-        icon.alt = game + " official logo";
-        icon.className = "game-icon";
-        nameDiv.appendChild(icon);
+/* Smooth Scroll for Navigation Links */
+document.querySelectorAll('.nav-links a').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    if (this.hash !== "") {
+      e.preventDefault();
+      const target = document.querySelector(this.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     }
-
-    const titleSpan = document.createElement("span");
-    titleSpan.textContent = game + ":";
-    nameDiv.appendChild(titleSpan);
-
-    const ratingsDiv = document.createElement("ul");
-    ratingsDiv.className = "game-ratings";
-
-    ratingsData[game].forEach(rating => {
-      const li = document.createElement("li");
-      const textSpan = document.createElement("span");
-      textSpan.textContent = rating.text;
-      li.appendChild(textSpan);
-      li.appendChild(createStarRating(rating.score));
-      ratingsDiv.appendChild(li);
-    });
-
-    block.appendChild(nameDiv);
-    block.appendChild(ratingsDiv);
-    ratingsList.appendChild(block);
   });
+});
 
-  document.getElementById("ratings").style.display = "block";
-  const ratingsButton = document.getElementById("ratingsButton");
-  ratingsButton.style.display = "none";
-  ratingsButton.setAttribute("aria-expanded", "true");
-}
+/* Collapsible Timeline Sections (History Page) */
+document.addEventListener("DOMContentLoaded", () => {
+  const timelineSections = document.querySelectorAll("section[class^='timeline-']");
+  timelineSections.forEach(section => {
+    const header = section.querySelector("h2");
+    if (header) {
+      header.style.cursor = "pointer";
+      header.addEventListener("click", () => {
+        const content = section.querySelector("p, figure");
+        if (content) {
+          content.style.display = (content.style.display === "none") ? "block" : "none";
+        }
+      });
+    }
+  });
+});
